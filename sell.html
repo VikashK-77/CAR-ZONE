@@ -1,0 +1,222 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell Your Car | CAR-ZONE</title>
+    <link rel="stylesheet" href="css/sell.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <a href="index.html" class="logo">CAR<span>-ZONE</span></a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cars.html">Browse Cars</a>
+            <a href="sell.html" class="active">Sell Your Car</a>
+        </nav>
+    </header>
+
+    <!-- Page Heading -->
+    <section class="sell-heading">
+        <h1>Sell Your Car With CAR-ZONE</h1>
+        <p>List your car easily and connect with potential buyers.</p>
+    </section>
+
+    <!-- Sell Car Form -->
+    <main class="sell-container">
+
+        <div class="form-heading">
+            <h2>Enter Your Car Details</h2>
+            <p>Fill in the information below to create your car listing.</p>
+        </div>
+
+        <form id="sellCarForm">
+
+            <!-- Basic Details -->
+            <h3 class="section-title">Basic Information</h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="brand">Car Brand *</label>
+                    <select id="brand" name="brand" required>
+                        <option value="">Select Brand</option>
+                        <option value="Maruti Suzuki">Maruti Suzuki</option>
+                        <option value="Hyundai">Hyundai</option>
+                        <option value="Tata">Tata</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Mahindra">Mahindra</option>
+                        <option value="Toyota">Toyota</option>
+                        <option value="Kia">Kia</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="model">Car Model *</label>
+                    <input type="text" id="model" name="model"
+                           placeholder="e.g. Swift, Nexon, Creta" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="year">Manufacturing Year *</label>
+                    <select id="year" name="year" required>
+                        <option value="">Select Year</option>
+                        <option value="2026">2026</option>
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="fuel">Fuel Type *</label>
+                    <select id="fuel" name="fuel" required>
+                        <option value="">Select Fuel</option>
+                        <option value="Petrol">Petrol</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="CNG">CNG</option>
+                        <option value="Electric">Electric</option>
+                        <option value="Hybrid">Hybrid</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="transmission">Transmission *</label>
+                    <select id="transmission" name="transmission" required>
+                        <option value="">Select Transmission</option>
+                        <option value="Manual">Manual</option>
+                        <option value="Automatic">Automatic</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="kilometers">Kilometers Driven *</label>
+                    <input type="number" id="kilometers" name="kilometers"
+                           placeholder="e.g. 35000" min="0" required>
+                </div>
+
+            </div>
+
+            <!-- Price Details -->
+            <h3 class="section-title">Pricing Details</h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="price">Expected Price (₹) *</label>
+                    <input type="number" id="price" name="price"
+                           placeholder="e.g. 450000" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="owners">Number of Previous Owners *</label>
+                    <select id="owners" name="owners" required>
+                        <option value="">Select Owners</option>
+                        <option value="1">1st Owner</option>
+                        <option value="2">2nd Owner</option>
+                        <option value="3">3rd Owner</option>
+                        <option value="4">4 or More Owners</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- Location -->
+            <h3 class="section-title">Location Details</h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="city">City *</label>
+                    <input type="text" id="city" name="city"
+                           placeholder="Enter your city" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="state">State *</label>
+                    <input type="text" id="state" name="state"
+                           placeholder="Enter your state" required>
+                </div>
+
+            </div>
+
+            <!-- Car Description -->
+            <h3 class="section-title">Additional Information</h3>
+
+            <div class="form-group full-width">
+                <label for="description">Car Description</label>
+                <textarea id="description" name="description"
+                          rows="5"
+                          placeholder="Describe your car's condition, features and other details..."></textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="form-group full-width">
+                <label for="carImage">Upload Car Images *</label>
+                <input type="file" id="carImage" name="carImage"
+                       accept="image/*" multiple required>
+                <small>You can select multiple car images.</small>
+            </div>
+
+            <!-- Contact Details -->
+            <h3 class="section-title">Seller Contact Details</h3>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label for="sellerName">Full Name *</label>
+                    <input type="text" id="sellerName" name="sellerName"
+                           placeholder="Enter your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Mobile Number *</label>
+                    <input type="tel" id="phone" name="phone"
+                           placeholder="Enter 10-digit mobile number"
+                           pattern="[6-9][0-9]{9}"
+                           maxlength="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email"
+                           placeholder="Enter your email" required>
+                </div>
+
+            </div>
+
+            <!-- Submit -->
+            <div class="submit-section">
+                <button type="submit" id="submitBtn">
+                    Submit Car Listing
+                </button>
+                <p>Fields marked with * are required.</p>
+            </div>
+
+        </form>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 CAR-ZONE. All Rights Reserved.</p>
+    </footer>
+
+    <script src="js/sell.js"></script>
+    <script src="js/login.js"></script>
+
+</body>
+</html>
