@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sell Your Car | CAR-ZONE</title>
     <link rel="stylesheet" href="css/sell.css">
+
+    <script>
+    const user = localStorage.getItem("currentUser");
+
+    if (!user) {
+        window.location.replace(
+            "login.html?mode=login&redirect=" +
+            encodeURIComponent("sell.html")
+        );
+    }
+</script>
 </head>
 <body>
 
@@ -210,13 +221,9 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2026 CAR-ZONE. All Rights Reserved.</p>
-    </footer>
-
-    <script src="js/sell.js"></script>
+   
     <script src="js/login.js"></script>
+    <script src="js/sell.js"></script>
 
 </body>
 </html>

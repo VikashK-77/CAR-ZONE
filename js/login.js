@@ -1,125 +1,198 @@
-// ===============================
-// CAR-ZONE AUTHENTICATION
-// ===============================
 
-// Get logged-in user
+// Get currently logged-in user.
+// This function is available to other JavaScript files too.
 function getCurrentUser() {
     try {
-        return JSON.parse(sessionStorage.getItem("carZoneUser"));
-    } catch {
+        return JSON.parse(localStorage.getItem("currentUser")) || null;
+    } catch (error) {
         return null;
     }
 }
 
-// Redirect to login and remember the requested page
-function requireLogin(destination) {
-    sessionStorage.setItem("carZoneRedirect", destination || "index.html");
-    window.location.href = "login.html?mode=login";
-}
+// Return user to the requested same-site page after login.
+function getPostLoginUrl() {
+    const redirect = new URLSearchParams(window.location.search).get("redirect");
 
-// Redirect after successful login/register
-function redirectAfterAuth() {
-    let destination = sessionStorage.getItem("carZoneRedirect");
-
-    sessionStorage.removeItem("carZoneRedirect");
-
-    if (!destination || destination.startsWith("//")) {
-        destination = "index.html";
+    if (!redirect) {
+        return "index.html";
     }
 
-    window.location.href = destination;
+    try {
+        const target = new URL(redirect, window.location.href);
+
+        if (target.origin === window.location.origin) {
+            return target.href;
+        }
+    } catch (error) {
+        // Invalid redirect: use the default page.
+    }
+
+    return "index.html";
 }
 
+document.addEventListener("DOMContentLoaded", function () {
 
-// ===============================
-// LOGIN / REGISTER TABS
-// ===============================
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
 
-const loginTab = document.getElementById("loginTab");
-const registerTab = document.getElementById("registerTab");
+    // Login page only: other pages don't contain these forms.
+    if (!loginForm || !registerForm) {
+        return;
+    }
 
-const loginForm = document.getElementById("loginForm");
-const registerForm = document.getElementById("registerForm");
+    const formTitle = document.getElementById("formTitle");
+    const formSubtitle = document.getElementById("formSubtitle");
+    const switchText = document.getElementById("switchText");
+    const switchButton = document.getElementById("switchButton");
+    const authMessage = document.getElementById("authMessage");
 
-function showLoginForm() {
-    if (!loginForm || !registerForm) return;
+    let currentMode = "login";
 
-    loginForm.classList.remove("hidden");
-    registerForm.classList.add("hidden");
+    function showMessage(message, color) {
+        authMessage.textContent = message;
+        authMessage.style.color = color;
+    }
 
-    loginTab.classList.add("active");
-    registerTab.classList.remove("active");
-}
+    // Switch between Login and Register.
+    function switchMode() {
 
-function showRegisterForm() {
-    if (!loginForm || !registerForm) return;
+        authMessage.textContent = "";
+        authMessage.style.color = "";
 
-    registerForm.classList.remove("hidden");
-    loginForm.classList.add("hidden");
+        if (currentMode === "login") {
 
-    registerTab.classList.add("active");
-    loginTab.classList.remove("active");
-}
+            currentMode = "register";
 
-if (loginTab && registerTab) {
-    loginTab.addEventListener("click", showLoginForm);
-    registerTab.addEventListener("click", showRegisterForm);
+            loginForm.classList.add("hidden");
+            registerForm.classList.remove("hidden");
 
-    document.getElementById("showRegister").addEventListener("click", function(event) {
-        event.preventDefault();
-        showRegisterForm();
+            formTitle.textContent = "Welcome to Car-Zone";
+            formSubtitle.textContent =
+                "Join Car-Zone to buy and sell cars directly.";
+
+            switchText.firstChild.textContent =
+                "Already have an account? ";
+
+            switchButton.textContent = "Login Now";
+
+        } else {
+
+            currentMode = "login";
+
+            registerForm.classList.add("hidden");
+            loginForm.classList.remove("hidden");
+
+            formTitle.textContent = "Welcome to Car-Zone";
+            formSubtitle.textContent =
+                "Enter your details to access your account.";
+
+            switchText.firstChild.textContent =
+                "Don't have an account? ";
+
+            switchButton.textContent = "Register Now";
+        }
+    }
+
+    switchButton.addEventListener("click", switchMode);
+
+    // Show / Hide password.
+    document.querySelectorAll(".toggle-password").forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            const input = document.getElementById(button.dataset.target);
+
+            if (!input) return;
+
+            if (input.type === "password") {
+                input.type = "text";
+                button.textContent = "Hide";
+            } else {
+                input.type = "password";
+                button.textContent = "Show";
+            }
+        });
     });
 
-    document.getElementById("showLogin").addEventListener("click", function(event) {
-        event.preventDefault();
-        showLoginForm();
-    });
-
-    // Open the correct form from the URL
-    const params = new URLSearchParams(window.location.search);
-    const mode = params.get("mode");
-
-    if (params.get("from") === "home") {
-        sessionStorage.removeItem("carZoneRedirect");
+    // Get registered users from localStorage.
+    function getUsers() {
+        try {
+            return JSON.parse(localStorage.getItem("users")) || [];
+        } catch (error) {
+            return [];
+        }
     }
 
-    if (mode === "register") {
-        showRegisterForm();
-    } else {
-        showLoginForm();
-    }
-}
+    // Login form.
+    loginForm.addEventListener("submit", function (event) {
 
-
-// ===============================
-// REGISTER
-// ===============================
-
-if (registerForm) {
-    registerForm.addEventListener("submit", function(event) {
         event.preventDefault();
 
-        const name = document.getElementById("registerName").value.trim();
-        const email = document.getElementById("registerEmail").value.trim().toLowerCase();
-        const password = document.getElementById("registerPassword").value;
-        const confirmPassword = document.getElementById("confirmPassword").value;
-        const message = document.getElementById("registerMessage");
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
 
-        if (password !== confirmPassword) {
-            message.style.color = "red";
-            message.textContent = "Passwords do not match.";
+        const users = getUsers();
+
+        const user = users.find(item =>
+            item.email.toLowerCase() === email.toLowerCase() &&
+            item.password === password
+        );
+
+        if (!user) {
+            showMessage("Invalid email or password.", "#d93636");
             return;
         }
 
-        let users = JSON.parse(sessionStorage.getItem("carZoneUsers") || "[]");
+        localStorage.setItem("currentUser", JSON.stringify({
+            name: user.name,
+            email: user.email
+        }));
 
-        const existingUser = users.find(function(user) {
-            return user.email === email;
-        });
+        showMessage("Login successful!", "#16834a");
+
+        window.location.href = getPostLoginUrl();
+    });
+
+    // Register form.
+    registerForm.addEventListener("submit", function (event) {
+
+        event.preventDefault();
+
+        const name = document.getElementById("registerName").value.trim();
+        const email = document.getElementById("registerEmail").value.trim();
+        const password = document.getElementById("registerPassword").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        const users = getUsers();
+
+        if (!name || !email || !password || !confirmPassword) {
+            showMessage("Please fill in all fields.", "#d93636");
+            return;
+        }
+
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+            showMessage("Please enter a valid email.", "#d93636");
+            return;
+        }
+
+        if (password.length < 6) {
+            showMessage("Password must be at least 6 characters.", "#d93636");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showMessage("Passwords do not match.", "#d93636");
+            return;
+        }
+
+        const existingUser = users.find(item =>
+            item.email.toLowerCase() === email.toLowerCase()
+        );
 
         if (existingUser) {
-            message.style.color = "red";
-            message.textContent = "This email is already registered.";
+            showMessage("This email is already registered.", "#d93636");
             return;
         }
 
@@ -131,119 +204,16 @@ if (registerForm) {
 
         users.push(newUser);
 
-        sessionStorage.setItem("carZoneUsers", JSON.stringify(users));
+        localStorage.setItem("users", JSON.stringify(users));
 
-        sessionStorage.setItem("carZoneUser", JSON.stringify({
+        localStorage.setItem("currentUser", JSON.stringify({
             name: name,
             email: email
         }));
 
-        message.style.color = "green";
-        message.textContent = "Registration successful! Redirecting...";
+        showMessage("Registration successful!", "#16834a");
 
-        setTimeout(redirectAfterAuth, 700);
+        window.location.href = getPostLoginUrl();
     });
-}
 
-
-// ===============================
-// LOGIN
-// ===============================
-
-if (loginForm) {
-    loginForm.addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        const email = document.getElementById("loginEmail").value.trim().toLowerCase();
-        const password = document.getElementById("loginPassword").value;
-        const message = document.getElementById("loginMessage");
-
-        const users = JSON.parse(sessionStorage.getItem("carZoneUsers") || "[]");
-
-        const matchedUser = users.find(function(user) {
-            return user.email === email && user.password === password;
-        });
-
-        if (!matchedUser) {
-            message.style.color = "red";
-            message.textContent = "Invalid email or password.";
-            return;
-        }
-
-        sessionStorage.setItem("carZoneUser", JSON.stringify({
-            name: matchedUser.name,
-            email: matchedUser.email
-        }));
-
-        message.style.color = "green";
-        message.textContent = "Login successful! Redirecting...";
-
-        setTimeout(redirectAfterAuth, 700);
-    });
-}
-
-
-// ===============================
-// PROTECT RESTRICTED LINKS
-// ===============================
-
-document.addEventListener("click", function(event) {
-    const protectedLink = event.target.closest(".protected-action");
-
-    if (!protectedLink) return;
-
-    if (!getCurrentUser()) {
-        event.preventDefault();
-        requireLogin(protectedLink.getAttribute("href"));
-    }
-});
-
-
-// ===============================
-// PROTECT SELL PAGE
-// ===============================
-
-const currentPage = window.location.pathname.split("/").pop();
-
-if (currentPage === "sell.html" && !getCurrentUser()) {
-    requireLogin("sell.html");
-}
-
-
-// ===============================
-// LOGOUT
-// ===============================
-
-function logoutUser() {
-    sessionStorage.removeItem("carZoneUser");
-    sessionStorage.removeItem("carZoneRedirect");
-
-    window.location.href = "index.html";
-}
-
-
-// ===============================
-// NAVBAR USER DETAILS
-// ===============================
-
-document.addEventListener("DOMContentLoaded", function() {
-
-    const navActions = document.querySelector(".nav-actions");
-    const currentUser = getCurrentUser();
-
-    if (navActions && currentUser) {
-
-        navActions.innerHTML = `
-            <span class="welcome-user">
-                Welcome, ${currentUser.name}
-            </span>
-
-            <button type="button" class="logout-btn" id="logoutButton">
-                Logout
-            </button>
-        `;
-
-        document.getElementById("logoutButton")
-            .addEventListener("click", logoutUser);
-    }
 });

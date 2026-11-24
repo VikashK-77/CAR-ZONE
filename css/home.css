@@ -1709,3 +1709,66 @@ main {
         animation-iteration-count: 1 !important;
     }
 }
+
+
+/* NAVBAR LOGIN & REGISTER BUTTONS */
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.nav-actions .login-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 23px;
+    border: 1px solid #172033;
+    border-radius: 7px;
+    background: transparent;
+    color: #172033;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.nav-actions .login-btn:hover {
+    background: #172033;
+    color: #ffffff;
+}
+
+.nav-actions .get-started-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 23px;
+    border: 1px solid #ffd43b;
+    border-radius: 7px;
+    background: #ffd43b;
+    color: #10151f;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.nav-actions .get-started-btn:hover {
+    background: #f2c322;
+    border-color: #f2c322;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+    .nav-actions {
+        gap: 8px;
+    }
+
+    .nav-actions .login-btn,
+    .nav-actions .get-started-btn {
+        padding: 9px 13px;
+        font-size: 12px;
+    }
+}

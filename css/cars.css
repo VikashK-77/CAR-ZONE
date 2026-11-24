@@ -211,3 +211,51 @@ footer {
         flex-direction: column;
     }
 }
+
+/* Car action buttons */
+.car-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+
+.view-details,
+.contact-seller {
+    flex: 1;
+    min-width: 110px;
+    text-align: center;
+    text-decoration: none;
+    padding: 11px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.view-details {
+    background: #172943;
+    color: white;
+}
+
+.view-details:hover {
+    background: #263e5e;
+}
+
+.contact-seller {
+    background: #ff9f1c;
+    color: #172943;
+}
+
+.contact-seller:hover {
+    background: #ed8d0b;
+}
+
+/* No results visibility */
+.no-results {
+    display: block;
+}
+
+.no-results[hidden] {
+    display: none;
+}

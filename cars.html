@@ -11,6 +11,7 @@
 
     <header class="navbar">
         <a href="index.html" class="logo">CAR<span>-ZONE</span></a>
+
         <nav>
             <a href="index.html">Home</a>
             <a href="cars.html" class="active">Browse Cars</a>
@@ -28,38 +29,42 @@
         <!-- Search and Filters -->
         <section class="filter-section">
 
-            <input type="text" id="searchInput"
-                   placeholder="Search car name...">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search car name..."
+                aria-label="Search car name"
+            >
 
-            <select id="budgetFilter">
+            <select id="budgetFilter" aria-label="Filter by budget">
                 <option value="">All Budgets</option>
                 <option value="3">Under ₹3 Lakh</option>
                 <option value="5">Under ₹5 Lakh</option>
                 <option value="7">Under ₹7 Lakh</option>
             </select>
 
-            <select id="typeFilter">
+            <select id="typeFilter" aria-label="Filter by car type">
                 <option value="">All Car Types</option>
                 <option value="Hatchback">Hatchback</option>
                 <option value="Sedan">Sedan</option>
                 <option value="SUV">SUV</option>
             </select>
 
-            <select id="fuelFilter">
+            <select id="fuelFilter" aria-label="Filter by fuel type">
                 <option value="">All Fuel Types</option>
                 <option value="Petrol">Petrol</option>
                 <option value="Diesel">Diesel</option>
                 <option value="CNG">CNG</option>
             </select>
 
-            <button id="resetBtn">Reset Filters</button>
+            <button type="button" id="resetBtn">Reset Filters</button>
 
         </section>
 
         <!-- Available Cars Heading -->
         <div class="results-heading">
             <h2>Available Cars</h2>
-            <p id="carCount">10 Cars Found</p>
+            <p id="carCount" aria-live="polite">9 Cars Found</p>
         </div>
 
         <!-- Car Listings -->
@@ -72,8 +77,11 @@
                 data-type="Hatchback"
                 data-fuel="Petrol">
 
-                <img src="https://static.toiimg.com/thumb/resizemode-4%2Cwidth-1280%2Cheight-720%2Cmsid-81424116/81424116.jpg"
-                     alt="Maruti Swift">
+                <img
+                    src="https://static.toiimg.com/thumb/resizemode-4%2Cwidth-1280%2Cheight-720%2Cmsid-81424116/81424116.jpg"
+                    alt="Maruti Swift"
+                    loading="lazy"
+                >
 
                 <div class="car-info">
                     <h3>Maruti Swift</h3>
@@ -89,8 +97,11 @@
                 data-type="Hatchback"
                 data-fuel="Petrol">
 
-                <img src="https://images10.gaadi.com/usedcar_image/BP2A.250605.031.A3/original/4db132eb-4d97-46a7-b5ba-5eccfce595b0.jpg"
-                     alt="Maruti WagonR">
+                <img
+                    src="https://images10.gaadi.com/usedcar_image/BP2A.250605.031.A3/original/4db132eb-4d97-46a7-b5ba-5eccfce595b0.jpg"
+                    alt="Maruti WagonR"
+                    loading="lazy"
+                >
 
                 <div class="car-info">
                     <h3>Maruti WagonR</h3>
@@ -106,8 +117,11 @@
                 data-type="Hatchback"
                 data-fuel="Petrol">
 
-                <img src="https://imgd.aeplcdn.com/640X480/vimages/202601/4345528_155626_1_1768662009770.jpg"
-                     alt="Tata Tiago">
+                <img
+                    src="https://imgd.aeplcdn.com/640X480/vimages/202601/4345528_155626_1_1768662009770.jpg"
+                    alt="Tata Tiago"
+                    loading="lazy"
+                >
 
                 <div class="car-info">
                     <h3>Tata Tiago</h3>
@@ -116,15 +130,18 @@
                 </div>
             </article>
 
-            <!-- Car 5 -->
+            <!-- Car 4 -->
             <article class="car-card"
                 data-name="Maruti Baleno"
                 data-price="4.5"
                 data-type="Hatchback"
                 data-fuel="Petrol">
 
-                <img src="https://dreamsauto.in/uploadFiles/Gallery/240929174650da.jpg"
-                     alt="Maruti Baleno">
+                <img
+                    src="https://dreamsauto.in/uploadFiles/Gallery/240929174650da.jpg"
+                    alt="Maruti Baleno"
+                    loading="lazy"
+                >
 
                 <div class="car-info">
                     <h3>Maruti Baleno</h3>
@@ -133,15 +150,18 @@
                 </div>
             </article>
 
-            <!-- Car 6 -->
+            <!-- Car 5 -->
             <article class="car-card"
                 data-name="Hyundai Aura"
                 data-price="4.2"
                 data-type="Sedan"
                 data-fuel="CNG">
 
-                <img src="https://imgd.aeplcdn.com/1280x720/n/cw/ec/41652/hyundai-aura-right-front-three-quarter6.jpeg?q=85"
-                     alt="Hyundai Aura">
+                <img
+                    src="https://imgd.aeplcdn.com/1280x720/n/cw/ec/41652/hyundai-aura-right-front-three-quarter6.jpeg?q=85"
+                    alt="Hyundai Aura"
+                    loading="lazy"
+                >
 
                 <div class="car-info">
                     <h3>Hyundai Aura</h3>
@@ -150,15 +170,18 @@
                 </div>
             </article>
 
-            <!-- Car 7 -->
+            <!-- Car 6 -->
             <article class="car-card"
                 data-name="Honda Amaze"
                 data-price="4.8"
                 data-type="Sedan"
                 data-fuel="Petrol">
 
-                <img src="https://img.autocarindia.com/ExtraImages/20210818115311_Honda_Amaza_fl.jpg"
-                     alt="Honda Amaze">
+                <img
+                    src="https://img.autocarindia.com/ExtraImages/20210818115311_Honda_Amaza_fl.jpg"
+                    alt="Honda Amaze"
+                    loading="lazy"
+                >
 
                 <div class="car-info">
                     <h3>Honda Amaze</h3>
@@ -167,15 +190,18 @@
                 </div>
             </article>
 
-            <!-- Car 8 -->
+            <!-- Car 7 -->
             <article class="car-card"
                 data-name="Tata Nexon"
                 data-price="6.0"
                 data-type="SUV"
                 data-fuel="Diesel">
 
-                <img src="https://imgd.aeplcdn.com/640X480/blur/image/used/lph8bnmduwvs.jpg?fit=true&qp=80"
-                     alt="Tata Nexon">
+                <img
+                    src="https://imgd.aeplcdn.com/640X480/blur/image/used/lph8bnmduwvs.jpg?fit=true&qp=80"
+                    alt="Tata Nexon"
+                    loading="lazy"
+                >
 
                 <div class="car-info">
                     <h3>Tata Nexon</h3>
@@ -184,15 +210,18 @@
                 </div>
             </article>
 
-            <!-- Car 9 -->
+            <!-- Car 8 -->
             <article class="car-card"
                 data-name="Hyundai Venue"
                 data-price="6.5"
                 data-type="SUV"
                 data-fuel="Petrol">
 
-                <img src="https://www.jansatta.com/wp-content/uploads/2022/06/Hyundai-Venue-Facelift-2022-2.jpg"
-                     alt="Hyundai Venue">
+                <img
+                    src="https://www.jansatta.com/wp-content/uploads/2022/06/Hyundai-Venue-Facelift-2022-2.jpg"
+                    alt="Hyundai Venue"
+                    loading="lazy"
+                >
 
                 <div class="car-info">
                     <h3>Hyundai Venue</h3>
@@ -201,15 +230,18 @@
                 </div>
             </article>
 
-            <!-- Car 10 -->
+            <!-- Car 9 -->
             <article class="car-card"
                 data-name="Maruti Vitara Brezza"
                 data-price="5.8"
                 data-type="SUV"
                 data-fuel="Diesel">
 
-                <img src="https://imgd.aeplcdn.com/640X480/vimages/202607/4671798_163686_1_1783929391136.jpg?fit=true&qp=80"
-                     alt="Maruti Vitara Brezza">
+                <img
+                    src="https://imgd.aeplcdn.com/640X480/vimages/202607/4671798_163686_1_1783929391136.jpg?fit=true&qp=80"
+                    alt="Maruti Vitara Brezza"
+                    loading="lazy"
+                >
 
                 <div class="car-info">
                     <h3>Maruti Vitara Brezza</h3>
@@ -220,9 +252,10 @@
 
         </section>
 
-        <p id="noResults" class="no-results">
-            No cars found. Try changing your filters.
-        </p>
+        <!-- No Results Message -->
+      <p id="noResults" class="no-results" hidden>
+    No cars found. Try changing your filters.
+</p>
 
     </main>
 
@@ -231,7 +264,7 @@
     </footer>
 
     <script src="js/login.js"></script>
-    <script src="js/login.js"></script>
+    <script src="js/car.js"></script>
 
 </body>
 </html>

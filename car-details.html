@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Car Details | CAR-ZONE</title>
+
+    <link rel="stylesheet" href="css/car-details.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="logo">CAR<span>-ZONE</span></a>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="cars.html" class="active">Browse Cars</a>
+            <a href="sell.html" class="protected-action">Sell Your Car</a>
+        </nav>
+    </header>
+
+    <main class="details-container">
+
+        <a href="cars.html" class="back-link">
+            ← Back to Browse Cars
+        </a>
+
+        <section class="details-card">
+
+            <div class="details-image">
+                <img id="detailsImage" src="" alt="Selected car">
+            </div>
+
+            <div class="details-content">
+
+                <p class="details-label">CAR-ZONE LISTING</p>
+
+                <h1 id="detailsName">Car Name</h1>
+
+                <h2 id="detailsPrice">₹0 Lakh</h2>
+
+                <p class="details-description">
+                    Explore the details of this pre-owned car.
+                </p>
+
+                <h3>Car Specifications</h3>
+
+                <div class="specifications">
+
+                    <div class="spec-item">
+                        <span>Manufacturing Year</span>
+                        <strong id="detailsYear">-</strong>
+                    </div>
+
+                    <div class="spec-item">
+                        <span>Fuel Type</span>
+                        <strong id="detailsFuel">-</strong>
+                    </div>
+
+                    <div class="spec-item">
+                        <span>Body Type</span>
+                        <strong id="detailsType">-</strong>
+                    </div>
+
+                    <div class="spec-item">
+                        <span>Transmission</span>
+                        <strong>Not specified</strong>
+                    </div>
+
+                    <div class="spec-item">
+                        <span>Mileage</span>
+                        <strong>Not specified</strong>
+                    </div>
+
+                </div>
+
+                <button type="button" id="contactSellerBtn">
+                    Contact Seller
+                </button>
+
+                <div class="purchase-actions">
+    <button type="button" id="buyCarBtn">
+        Buy This Car
+    </button>
+
+    <button type="button" id="contactSellerBtn">
+        Contact Seller
+    </button>
+</div>
+
+<p class="seller-note">
+    Submit your interest to connect with the car seller.
+</p>
+
+<!-- Purchase Enquiry Form -->
+<form id="purchaseForm" hidden>
+    <h3>Purchase Enquiry</h3>
+
+    <div class="form-group">
+        <label for="buyerName">Your Name *</label>
+        <input type="text" id="buyerName" required
+               placeholder="Enter your name">
+    </div>
+
+    <div class="form-group">
+        <label for="buyerPhone">Mobile Number *</label>
+        <input type="tel" id="buyerPhone" required
+               maxlength="10" pattern="[6-9][0-9]{9}"
+               placeholder="Enter 10-digit mobile number">
+    </div>
+
+    <div class="form-group">
+        <label for="buyerMessage">Message</label>
+        <textarea id="buyerMessage" rows="3"
+                  placeholder="I'm interested in purchasing this car."></textarea>
+    </div>
+
+    <button type="submit" id="submitEnquiryBtn">
+        Submit Purchase Enquiry
+    </button>
+</form>
+
+                <p class="seller-note">
+                    Seller contact details will be connected with the backend later.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="js/login.js"></script>
+    <script src="js/car-details.js"></script>
+
+</body>
+</html>
